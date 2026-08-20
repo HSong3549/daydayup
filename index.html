@@ -32,6 +32,12 @@
     transform: translateY(-2px);
     border-color: #1a5fb4;
   }
+  .visits {
+    text-align: center;
+    margin-top: 40px;
+    color: #5e81ac;
+    font-size: 0.95em;
+  }
 </style>
 </head>
 <body>
@@ -45,6 +51,16 @@
     <li><a href="another_page.html" target="_blank" rel="noopener">✏️ Another Page</a></li>
     -->
   </ul>
+  <p class="visits" id="visits"></p>
 </div>
+<script>
+  fetch("https://abacus.jasoncameron.dev/hit/hsong3549-daydayup/homepage")
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      document.getElementById("visits").textContent =
+        "Total number of visits: " + data.value.toLocaleString();
+    })
+    .catch(function () { /* counter unavailable — show nothing */ });
+</script>
 </body>
 </html>
