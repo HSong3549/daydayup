@@ -208,21 +208,22 @@ function drawMarkers() {
   lg.innerHTML = '';
   PLACES.forEach(function (p, i) {
     var pt = projectMarker(p.lng, p.lat);
+    var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('data-cx', pt[0]);
+    g.setAttribute('data-cy', pt[1]);
+    g.setAttribute('class', 'marker');
+    g.setAttribute('data-idx', i);
+    g.setAttribute('data-type', p.t);
     if (selectedIdx === i) {
       var halo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      halo.setAttribute('cx', pt[0]);
-      halo.setAttribute('cy', pt[1]);
+      halo.setAttribute('cx', 0);
+      halo.setAttribute('cy', 0);
       halo.setAttribute('r', 9);
       halo.setAttribute('fill', 'rgba(255,235,0,0.75)');
       halo.setAttribute('stroke', '#c99700');
       halo.setAttribute('stroke-width', '1.5');
-      mg.appendChild(halo);
+      g.appendChild(halo);
     }
-    var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    g.setAttribute('transform', 'translate(' + pt[0] + ' ' + pt[1] + ')');
-    g.setAttribute('class', 'marker');
-    g.setAttribute('data-idx', i);
-    g.setAttribute('data-type', p.t);
     g.appendChild(markerShape(p));
     g.addEventListener('click', function (e) {
       e.stopPropagation();
@@ -231,15 +232,28 @@ function drawMarkers() {
     mg.appendChild(g);
 
     if (selectedIdx === i) {
+      var lw = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      lw.setAttribute('data-cx', pt[0]);
+      lw.setAttribute('data-cy', pt[1]);
       var lab = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      lab.setAttribute('x', pt[0] + 10);
-      lab.setAttribute('y', pt[1] + 4);
+      lab.setAttribute('x', 10);
+      lab.setAttribute('y', 4);
       lab.setAttribute('class', 'marker-label');
       lab.textContent = p.n;
-      lg.appendChild(lab);
+      lw.appendChild(lab);
+      lg.appendChild(lw);
     }
   });
+  applyMarkerScale();
   updateRiverHighlight();
+}
+
+function applyMarkerScale() {
+  // Icons grow gently with zoom (square root), capped at 2x their base size
+  var k = Math.min(2, Math.max(1, Math.sqrt(scale))) / scale;
+  Array.prototype.forEach.call(document.querySelectorAll('[data-cx]'), function (el) {
+    el.setAttribute('transform', 'translate(' + el.getAttribute('data-cx') + ' ' + el.getAttribute('data-cy') + ') scale(' + k + ')');
+  });
 }
 
 function drawRivers() {
@@ -328,6 +342,7 @@ function updateTransform() {
   document.getElementById('markers').setAttribute('transform', 'translate(' + tx + ' ' + ty + ') scale(' + scale + ')');
   document.getElementById('rivers').setAttribute('transform', 'translate(' + tx + ' ' + ty + ') scale(' + scale + ')');
   document.getElementById('labels').setAttribute('transform', 'translate(' + tx + ' ' + ty + ') scale(' + scale + ')');
+  applyMarkerScale();
 }
 
 function flyTo(x, y, newScale) {
