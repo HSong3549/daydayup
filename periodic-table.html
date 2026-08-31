@@ -181,6 +181,94 @@
   .kb{font-size:11px;color:var(--on-ink-dim);text-align:center;line-height:1.7;}
   .kb kbd{background:#262a48;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:11px;color:var(--on-ink);}
   .empty{text-align:center;color:var(--on-ink-dim);font-size:14px;padding:40px 10px;}
+
+  /* ---------- game ---------- */
+  .gm{max-width:900px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:14px;}
+  .lvl{display:flex;background:#23264180;border:1px solid var(--line);border-radius:11px;padding:3px;gap:3px;flex-wrap:wrap;}
+  .lvl button{flex:1 1 auto;border:0;background:transparent;color:var(--on-ink-dim);font-size:12.5px;font-weight:600;padding:8px 8px;border-radius:8px;cursor:pointer;font-family:inherit;white-space:nowrap;}
+  .lvl button.on{background:var(--on-ink);color:var(--ink);}
+  .lvl button .st{font-size:10px;letter-spacing:.05em;margin-left:4px;color:var(--gold);}
+  .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  @media (max-width:640px){.modes{grid-template-columns:1fr;}}
+  .mode{background:linear-gradient(180deg,var(--paper) 0%,#f6efdd 100%);color:var(--text);border:0;border-radius:16px;padding:18px 16px 16px;text-align:left;cursor:pointer;font-family:inherit;box-shadow:0 10px 26px rgba(0,0,0,.35);position:relative;overflow:hidden;transition:transform .15s;display:flex;flex-direction:column;gap:6px;}
+  .mode::before{content:"";position:absolute;left:0;top:0;right:0;height:7px;background:var(--c);}
+  .mode:hover{transform:translateY(-3px);}
+  .mode .ic{font-size:30px;line-height:1;}
+  .mode h3{font-family:Georgia,serif;font-size:20px;margin:6px 0 0;color:#1b1822;}
+  .mode p{margin:0;font-size:13px;line-height:1.45;color:var(--muted);flex:1;}
+  .mode .best{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-top:6px;display:flex;justify-content:space-between;align-items:center;}
+  .mode .best b{color:#1b1822;font-size:14px;letter-spacing:0;}
+  .stars{color:var(--gold);letter-spacing:1px;font-size:14px;}
+  .stars .off{color:#cfc6b0;}
+  .ghow{font-size:12.5px;color:var(--on-ink-dim);text-align:center;line-height:1.6;}
+  .hud{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .hud .pill{background:var(--panel);border:1px solid var(--line);border-radius:99px;padding:6px 12px;font-size:12.5px;color:var(--on-ink-dim);font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .hud .pill b{color:var(--on-ink);}
+  .hud .pill.streak b{color:var(--coral);}
+  .hud .pill.time b{color:var(--gold);}
+  .hud .quit{margin-left:auto;border:1px solid var(--line);background:transparent;color:var(--on-ink-dim);border-radius:99px;padding:6px 12px;font-size:12.5px;cursor:pointer;font-family:inherit;}
+  .hud .quit:hover{color:var(--on-ink);border-color:var(--gold);}
+  .gbar{height:5px;border-radius:99px;background:#2a2d4d;overflow:hidden;}
+  .gbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--coral),var(--gold));transition:width .3s;}
+  .gbar.time i{transition:width 1s linear;background:linear-gradient(90deg,var(--gold),#69db7c);}
+  .prompt{background:linear-gradient(180deg,var(--paper) 0%,#f6efdd 100%);color:var(--text);border-radius:16px;padding:16px 18px;box-shadow:0 12px 30px rgba(0,0,0,.4);position:relative;overflow:hidden;text-align:center;}
+  .prompt::before{content:"";position:absolute;left:0;top:0;right:0;height:6px;background:var(--c,#c9c1ad);}
+  .prompt .q{font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted);}
+  .prompt .big{font-family:Georgia,serif;font-weight:700;font-size:clamp(26px,6vw,38px);color:#1b1822;line-height:1.15;margin:6px 0 2px;}
+  .prompt .big span{color:var(--muted);font-weight:400;font-size:.6em;margin-left:8px;}
+  .prompt .sub{font-size:13px;color:var(--muted);min-height:18px;}
+  .prompt .sub.ok{color:#2b8a3e;font-weight:700;}
+  .prompt .sub.bad{color:#c92a2a;font-weight:700;}
+  .prompt.shake{animation:shake .35s;}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+  .hintbtn{border:1px solid rgba(0,0,0,.15);background:#fff8;color:var(--text);border-radius:9px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px;}
+  .hintbtn:disabled{opacity:.45;cursor:default;}
+  .ggrid-wrap{overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch;}
+  .swipe-note{display:none;}
+  @media (max-width:600px){.swipe-note{display:inline;}}
+  .ggrid{min-width:560px;display:grid;grid-template-columns:repeat(18,minmax(0,1fr));gap:3px;}
+  .gc{aspect-ratio:1/1;border-radius:5px;border:1px solid var(--line);background:#1b1e36;color:var(--on-ink);font-family:Georgia,serif;font-weight:700;font-size:clamp(9px,1.3vw,15px);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:transform .1s,background .2s;position:relative;}
+  .gc:hover{border-color:var(--gold);transform:scale(1.08);z-index:2;}
+  .gc.done{background:color-mix(in srgb,var(--c) 55%,var(--panel));border-color:var(--c);cursor:default;}
+  .gc.done:hover{transform:none;border-color:var(--c);}
+  .gc.out{background:transparent;border-style:dashed;border-color:#2a2d4d;color:#4a4d70;cursor:default;font-weight:400;}
+  .gc.out:hover{transform:none;border-color:#2a2d4d;}
+  .gc.wrong{background:var(--coral) !important;border-color:var(--coral) !important;animation:pop .4s;}
+  .gc.reveal{animation:pulse 1s 2;box-shadow:0 0 0 2px var(--gold);}
+  .gc.hint{box-shadow:0 0 0 2px var(--gold);}
+  @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 2px var(--gold)}50%{box-shadow:0 0 0 6px rgba(217,155,52,.25)}}
+  .gnum{display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--on-ink-dim);}
+  .choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .choice{border:1.5px solid var(--line);background:var(--panel);color:var(--on-ink);border-radius:13px;padding:16px 12px;font-size:clamp(15px,3.5vw,19px);font-weight:700;cursor:pointer;font-family:Georgia,serif;transition:.15s;min-height:58px;}
+  .choice:hover{border-color:var(--gold);}
+  .choice.ok{background:#2b8a3e;border-color:#2b8a3e;color:#fff;}
+  .choice.bad{background:var(--coral);border-color:var(--coral);color:#fff;}
+  .choice:disabled{cursor:default;}
+  .typebox{display:flex;gap:10px;}
+  .typebox input{flex:1;min-width:0;width:100%;background:var(--panel);border:2px solid var(--line);border-radius:13px;color:var(--on-ink);font-size:28px;font-weight:700;font-family:Georgia,serif;text-align:center;padding:12px;outline:none;text-transform:none;}
+  .typebox input:focus{border-color:var(--gold);}
+  .typebox input.ok{border-color:#2b8a3e;}
+  .typebox input.bad{border-color:var(--coral);}
+  .typebox button{border:1px solid var(--line);background:var(--ink-2);color:var(--on-ink-dim);border-radius:13px;padding:0 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;}
+  .bigbtn{border:0;background:var(--gold);color:#3a2807;border-radius:13px;padding:14px 20px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;}
+  .bigbtn.ghost{background:transparent;border:1px solid var(--line);color:var(--on-ink-dim);}
+  .result{background:linear-gradient(180deg,var(--paper) 0%,#f6efdd 100%);color:var(--text);border-radius:18px;padding:26px 22px;text-align:center;box-shadow:0 18px 44px rgba(0,0,0,.45);display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;overflow:hidden;}
+  .result .rstars{font-size:44px;letter-spacing:4px;color:var(--gold);}
+  .result .rstars .off{color:#e2d9c2;}
+  .result h2{font-family:Georgia,serif;margin:0;font-size:28px;color:#1b1822;}
+  .result .score{font-size:15px;color:var(--muted);}
+  .result .score b{color:#1b1822;font-size:22px;}
+  .result .rgrid{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin:8px 0 12px;}
+  .result .rgrid div{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700;}
+  .result .rgrid div b{display:block;font-size:20px;color:#1b1822;letter-spacing:0;}
+  .result .newbest{background:var(--gold);color:#3a2807;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border-radius:99px;padding:4px 12px;}
+  .result .miss{font-size:13px;color:var(--muted);line-height:1.6;max-width:520px;}
+  .result .miss b{color:#1b1822;}
+  .result .acts{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px;}
+  .result .acts .bigbtn.ghost{color:var(--text);border-color:rgba(0,0,0,.2);}
+  .confetti{position:absolute;top:-10px;font-size:18px;animation:fall 2.2s ease-in forwards;pointer-events:none;}
+  @keyframes fall{to{transform:translateY(420px) rotate(540deg);opacity:0;}}
   @media (max-width:640px){.kb{display:none;}}
   @media (prefers-reduced-motion:reduce){.card,.bar i,.detail,.backdrop,.cell{transition:none;}}
 </style>
@@ -215,8 +303,9 @@
       <div class="sub">Periodic table<br>118 elements</div>
     </div>
     <div class="seg" id="viewSeg">
-      <button data-view="table" class="on">Periodic table</button>
+      <button data-view="table" class="on">Table</button>
       <button data-view="cards">Flash cards</button>
+      <button data-view="game">Game</button>
     </div>
   </header>
 
@@ -286,6 +375,11 @@
       <p class="kb"><kbd>Space</kbd> flip &nbsp; <kbd>&larr;</kbd><kbd>&rarr;</kbd> move &nbsp; <kbd>1</kbd> still learning &nbsp; <kbd>2</kbd> got it</p>
     </div>
   </section>
+
+  <!-- ================= GAME VIEW ================= -->
+  <section class="view" id="viewGame">
+    <div class="gm" id="gm"></div>
+  </section>
 </div>
 
 <script>
@@ -322,7 +416,10 @@ function setView(v){
   document.querySelectorAll("#viewSeg button").forEach(b => b.classList.toggle("on", b.dataset.view===v));
   $("viewTable").classList.toggle("on", v==="table");
   $("viewCards").classList.toggle("on", v==="cards");
+  $("viewGame").classList.toggle("on", v==="game");
   if(v==="cards") render();
+  if(v==="game") gameHome();
+  else G.stopTimer();
   try{ localStorage.setItem(KEY+"-view", v); }catch(e){}
 }
 $("viewSeg").addEventListener("click", e => { const b=e.target.closest("button"); if(b) setView(b.dataset.view); });
@@ -545,10 +642,281 @@ document.addEventListener("keydown", e => {
   c.addEventListener("touchend", e=>{ if(x0==null) return; const dx=e.changedTouches[0].clientX-x0; x0=null; if(Math.abs(dx)>50) move(dx<0?1:-1); }, {passive:true});
 })();
 
+
+/* ================= GAME ================= */
+const GKEY = "pt-game-v1";
+const LEVELS = [
+  {id:"l10",  name:"First 10",  filter:e=>e.z<=10},
+  {id:"l18",  name:"First 18",  filter:e=>e.z<=18},
+  {id:"l36",  name:"First 36",  filter:e=>e.z<=36},
+  {id:"main", name:"Main table", filter:e=>e.row<=7},
+  {id:"all",  name:"All 118",   filter:()=>true},
+];
+const MODES = {
+  place: {name:"Place It",   ic:"🧩", c:"var(--c-nonmetal)",  about:"An element is called out — tap the square where it belongs on the blank table. Learn where everything lives."},
+  name:  {name:"Name It",    ic:"🎯", c:"var(--c-alkali)",    about:"Quick-fire multiple choice: symbol, name and atomic number. Answer fast for bonus points."},
+  speed: {name:"Speed Type", ic:"⚡", c:"var(--c-transition)", about:"60 seconds on the clock. Type the symbol for each element name as fast as you can."},
+};
+let gbest = (()=>{ try{ return JSON.parse(localStorage.getItem(GKEY))||{}; }catch(e){ return {}; } })();
+function gsave(){ try{ localStorage.setItem(GKEY, JSON.stringify(gbest)); }catch(e){} }
+const G = { level: "l10", timer:null, stopTimer(){ if(G.timer){ clearInterval(G.timer); G.timer=null; } } };
+try{ const l = localStorage.getItem(GKEY+"-level"); if(LEVELS.some(x=>x.id===l)) G.level = l; }catch(e){}
+const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+const rnd = a => a[Math.floor(Math.random()*a.length)];
+const levelPool = () => ELEMENTS.filter(LEVELS.find(l=>l.id===G.level).filter);
+const starsHTML = (n, cls) => `<span class="${cls||'stars'}">${"★".repeat(n)}<span class="off">${"★".repeat(3-n)}</span></span>`;
+function levelStars(id){ return Math.max(...Object.keys(MODES).map(m => (gbest[m+":"+id]||{}).stars||0), 0); }
+
+function gameHome(){
+  G.stopTimer(); G.keyHandler=null;
+  const M = $("gm");
+  M.innerHTML = `
+    <div class="lvl" id="lvlSeg">${LEVELS.map(l=>`<button data-level="${l.id}" class="${l.id===G.level?'on':''}">${l.name}${levelStars(l.id)?`<span class="st">${"★".repeat(levelStars(l.id))}</span>`:""}</button>`).join("")}</div>
+    <div class="modes">${Object.keys(MODES).map(m => { const b = gbest[m+":"+G.level]; return `
+      <button class="mode" data-mode="${m}" style="--c:${MODES[m].c}">
+        <span class="ic">${MODES[m].ic}</span><h3>${MODES[m].name}</h3><p>${MODES[m].about}</p>
+        <span class="best"><span>Best ${b ? `<b>${b.best}</b>` : "<b>—</b>"}</span>${starsHTML(b?b.stars:0)}</span>
+      </button>`; }).join("")}</div>
+    <p class="ghow">Pick a level and a game. Earn up to ★★★ per game — stars show next to the level when you've earned them.<br>Best scores are saved on this device.</p>`;
+  M.querySelector("#lvlSeg").addEventListener("click", e => { const b=e.target.closest("button"); if(!b) return; G.level=b.dataset.level; try{ localStorage.setItem(GKEY+"-level", G.level);}catch(x){} gameHome(); });
+  M.querySelectorAll(".mode").forEach(b => b.addEventListener("click", () => startGame(b.dataset.mode)));
+}
+function startGame(mode){
+  if(mode==="place") playPlace();
+  else if(mode==="name") playName();
+  else playSpeed();
+}
+function hudHTML(extra){
+  return `<div class="hud">
+    <span class="pill">Score <b id="hScore">0</b></span>
+    <span class="pill streak">Streak <b id="hStreak">0</b></span>
+    ${extra||""}
+    <button class="quit" id="hQuit">✕ Quit</button>
+  </div>`;
+}
+function stars3(pct){ return pct>=0.9 ? 3 : pct>=0.7 ? 2 : pct>=0.4 ? 1 : 0; }
+function finish(mode, score, stats){
+  G.stopTimer();
+  const key = mode+":"+G.level, prev = gbest[key];
+  const isBest = !prev || score > prev.best;
+  if(isBest || (prev && stats.stars > prev.stars)) { gbest[key] = {best: Math.max(score, prev?prev.best:0), stars: Math.max(stats.stars, prev?prev.stars:0)}; gsave(); }
+  const lvl = LEVELS.find(l=>l.id===G.level).name;
+  const title = stats.stars===3 ? "Brilliant!" : stats.stars===2 ? "Great job!" : stats.stars===1 ? "Nice work!" : "Keep practicing!";
+  const missHTML = stats.missed && stats.missed.length ? `<div class="miss">Ones to review: ${stats.missed.slice(0,12).map(z=>`<b>${byZ[z].sym}</b> ${byZ[z].name}`).join(" · ")}${stats.missed.length>12?" …":""}</div>` : `<div class="miss">Perfect — nothing to review!</div>`;
+  $("gm").innerHTML = `
+    <div class="result" id="result">
+      <div class="rstars">${"★".repeat(stats.stars)}<span class="off">${"★".repeat(3-stats.stars)}</span></div>
+      <h2>${title}</h2>
+      <div class="score">${MODES[mode].name} · ${lvl} &nbsp; <b>${score}</b> pts</div>
+      ${isBest && prev ? `<span class="newbest">New best!</span>` : (!prev ? `<span class="newbest">First score saved</span>` : "")}
+      <div class="rgrid">${stats.cells.map(c=>`<div>${c[0]}<b>${c[1]}</b></div>`).join("")}</div>
+      ${missHTML}
+      <div class="acts"><button class="bigbtn" id="rAgain">Play again</button><button class="bigbtn ghost" id="rHome">Choose another game</button></div>
+    </div>`;
+  $("rAgain").addEventListener("click", () => startGame(mode));
+  $("rHome").addEventListener("click", gameHome);
+  if(stats.stars===3){ const R=$("result"); for(let i=0;i<24;i++){ const c=document.createElement("span"); c.className="confetti"; c.textContent=rnd(["⭐","✨","🎉","🧪","⚛️"]); c.style.left=(Math.random()*100)+"%"; c.style.animationDelay=(Math.random()*.8)+"s"; c.style.fontSize=(14+Math.random()*14)+"px"; R.appendChild(c); } }
+}
+
+/* ---- Place It ---- */
+function playPlace(){
+  const pool = levelPool(), queue = shuffle(pool.map(e=>e.z));
+  const showF = G.level==="all";
+  let score=0, streak=0, correct=0, wrong=0, hints=0, cur=null, locked=false, missed=[], attemptsOnCur=0;
+  const t0 = Date.now();
+  const M = $("gm");
+  M.innerHTML = hudHTML(`<span class="pill">Placed <b id="hDone">0</b>/${pool.length}</span>`) + `
+    <div class="gbar"><i id="gBar"></i></div>
+    <div class="prompt" id="gPrompt"><div class="q">Where does this element go?</div><div class="big" id="pBig"></div><div class="sub" id="pSub"></div><button class="hintbtn" id="pHint">💡 Hint (−5 pts)</button></div>
+    <div class="ggrid-wrap"><div class="ggrid" id="ggrid"></div></div>
+    <p class="ghow">Tap the square where the element belongs. Wrong taps cost your streak; the right square lights up so you learn it.<span class="swipe-note"><br>Swipe the table sideways to reach every column.</span></p>`;
+  const inLevel = {}; pool.forEach(e=>inLevel[e.z]=true);
+  const grid = {}; ELEMENTS.forEach(e => grid[e.row+"-"+e.col]=e);
+  let gh = "";
+  for(let g=1; g<=18; g++) gh += `<div class="gnum">${g}</div>`;
+  const maxP = Math.max(...pool.map(e=>e.period));
+  const rows = showF ? [1,2,3,4,5,6,7,9,10] : [1,2,3,4,5,6,7].filter(r=>r<=maxP);
+  for(const r of rows){
+    if(r===9) gh += `<div style="grid-column:1/-1;height:8px"></div>`;
+    for(let c=1;c<=18;c++){
+      const e = grid[r+"-"+c];
+      if(!e){
+        if(r===6&&c===3) gh += `<div class="gc out" style="font-size:8px">57–71</div>`;
+        else if(r===7&&c===3) gh += `<div class="gc out" style="font-size:8px">89–103</div>`;
+        else gh += `<div></div>`;
+      } else if(!inLevel[e.z]) gh += `<button class="gc out" data-z="${e.z}" tabindex="-1">${e.sym}</button>`;
+      else gh += `<button class="gc" data-z="${e.z}" style="--c:var(--c-${e.cat})" aria-label="Square for element ${e.z}"></button>`;
+    }
+  }
+  $("ggrid").innerHTML = gh;
+  function hud(){ $("hScore").textContent=score; $("hStreak").textContent=streak; $("hDone").textContent=correct; $("gBar").style.width=(correct/pool.length*100)+"%"; }
+  function next(){
+    if(!queue.length){
+      const secs = Math.round((Date.now()-t0)/1000);
+      const acc = correct/(correct+wrong);
+      const st = stars3(acc - hints*0.02);
+      finish("place", score, {stars:st, missed, cells:[["Accuracy", Math.round(acc*100)+"%"],["Wrong taps", wrong],["Hints", hints],["Time", secs+"s"]]});
+      return;
+    }
+    cur = byZ[queue.shift()]; attemptsOnCur=0; locked=false;
+    $("gPrompt").style.setProperty("--c", `var(--c-${cur.cat})`);
+    $("pBig").innerHTML = `${esc(cur.name)}<span>${cur.sym}</span>`;
+    $("pSub").textContent = ""; $("pSub").className="sub";
+    $("pHint").disabled = false;
+    document.querySelectorAll(".gc.hint,.gc.reveal").forEach(x=>x.classList.remove("hint","reveal"));
+  }
+  $("pHint").addEventListener("click", () => {
+    if(locked||!cur) return; hints++; score=Math.max(0,score-5); $("pHint").disabled=true;
+    $("pSub").textContent = `Hint: ${CATS[cur.cat].name}, period ${cur.period}` + (cur.row<=7 ? `, group ${cur.group}` : "") + ` · atomic number ${cur.z}`;
+    document.querySelectorAll(`.gc[data-z]:not(.out):not(.done)`).forEach(c => { if(byZ[c.dataset.z].cat===cur.cat) c.classList.add("hint"); });
+    hud();
+  });
+  $("ggrid").addEventListener("click", e => {
+    const c = e.target.closest(".gc"); if(!c || locked || !cur || c.classList.contains("out") || c.classList.contains("done")) return;
+    const z = +c.dataset.z;
+    if(z===cur.z){
+      locked=true; correct++; streak++;
+      const pts = (attemptsOnCur===0 ? 10 : 4) + Math.min(streak-1, 5)*2;
+      score += pts;
+      c.classList.add("done"); c.textContent = cur.sym; c.style.setProperty("--c", `var(--c-${cur.cat})`);
+      $("pSub").textContent = `✓ +${pts}` + (streak>=3 ? ` · streak ×${streak}` : ""); $("pSub").className="sub ok";
+      hud(); setTimeout(next, 550);
+    } else {
+      attemptsOnCur++; wrong++; streak=0;
+      const w = byZ[z];
+      c.classList.add("wrong"); setTimeout(()=>c.classList.remove("wrong"), 450);
+      $("pSub").textContent = `✕ That square is ${w.name} (${w.sym}). Try again` + (attemptsOnCur>=2 ? " — it's glowing." : "."); $("pSub").className="sub bad";
+      if(attemptsOnCur>=2){ const t = document.querySelector(`.gc[data-z="${cur.z}"]`); if(t) t.classList.add("reveal"); }
+      if(attemptsOnCur===1 && !missed.includes(cur.z)) missed.push(cur.z);
+      hud();
+    }
+  });
+  $("hQuit").addEventListener("click", gameHome);
+  hud(); next();
+  // scroll to first available row on small screens
+  setTimeout(()=>{ const w=document.querySelector(".ggrid-wrap"); if(w) w.scrollLeft = 0; }, 50);
+}
+
+/* ---- Name It ---- */
+function playName(){
+  const pool = levelPool();
+  const nQ = Math.min(12, pool.length);
+  const order = shuffle(pool).slice(0, nQ);
+  let i=0, score=0, streak=0, correct=0, missed=[], qStart=0, locked=false;
+  const M = $("gm");
+  M.innerHTML = hudHTML(`<span class="pill">Question <b id="hQ">1</b>/${nQ}</span>`) + `
+    <div class="gbar"><i id="gBar"></i></div>
+    <div class="prompt" id="gPrompt"><div class="q" id="pQ"></div><div class="big" id="pBig"></div><div class="sub" id="pSub"></div></div>
+    <div class="choices" id="choices"></div>
+    <p class="ghow">Answer within 3 seconds for a speed bonus. Keys <kbd>1</kbd>–<kbd>4</kbd> pick an answer.</p>`;
+  function hud(){ $("hScore").textContent=score; $("hStreak").textContent=streak; $("hQ").textContent=Math.min(i+1,nQ); $("gBar").style.width=(i/nQ*100)+"%"; }
+  function distractors(e, kind){
+    // prefer elements that are "confusable": same category, nearby number, or same first letter
+    const others = pool.filter(x=>x.z!==e.z);
+    const scoreFn = x => (x.cat===e.cat?2:0) + (Math.abs(x.z-e.z)<=6?2:0) + (x.sym[0]===e.sym[0]?3:0) + (x.name[0]===e.name[0]?2:0) + Math.random()*3;
+    let cand = others.sort((a,b)=>scoreFn(b)-scoreFn(a)).slice(0,3);
+    if(kind==="num"){ // numbers: nearby distinct numbers
+      const set = new Set([e.z]); const out=[];
+      while(out.length<3){ const d = e.z + rnd([-3,-2,-1,1,2,3,4,-4,5,-5]); if(d>=1 && d<=118 && !set.has(d)){ set.add(d); out.push(d); } }
+      return out;
+    }
+    return cand;
+  }
+  let q = null;
+  function ask(){
+    if(i>=nQ){ const acc=correct/nQ; finish("name", score, {stars:stars3(acc), missed, cells:[["Correct", correct+"/"+nQ],["Accuracy", Math.round(acc*100)+"%"],["Best streak", bestStreak]]}); return; }
+    const e = order[i]; locked=false;
+    const kinds = ["sym","name","name2"].concat(G.level==="l10"||G.level==="l18"||G.level==="l36" ? ["num"] : []);
+    const kind = rnd(kinds);
+    $("gPrompt").style.setProperty("--c", `var(--c-${e.cat})`);
+    let choices, answer, fmt = x=>x;
+    if(kind==="sym"){ $("pQ").textContent="What is the symbol for"; $("pBig").textContent=e.name; choices=distractors(e).concat([e]); answer=e.sym; fmt=x=>x.sym; }
+    else if(kind==="name"){ $("pQ").textContent="Which element is"; $("pBig").textContent=e.sym; choices=distractors(e).concat([e]); answer=e.name; fmt=x=>x.name; }
+    else if(kind==="name2"){ $("pQ").textContent="Which element has atomic number"; $("pBig").textContent=e.z; choices=distractors(e).concat([e]); answer=e.name; fmt=x=>x.name; }
+    else { $("pQ").textContent="What is the atomic number of"; $("pBig").innerHTML=`${esc(e.name)}<span>${e.sym}</span>`; choices=distractors(e,"num").concat([e.z]); answer=String(e.z); fmt=x=>String(x); }
+    $("pSub").textContent=""; $("pSub").className="sub";
+    const opts = shuffle(choices.map(fmt));
+    $("choices").innerHTML = opts.map((o,k)=>`<button class="choice" data-v="${esc(o)}">${esc(o)}</button>`).join("");
+    q = {e, answer}; qStart = Date.now(); hud();
+  }
+  let bestStreak = 0;
+  function pick(btn){
+    if(locked || !btn) return; locked=true;
+    const v = btn.dataset.v, ok = v===q.answer;
+    const dt = (Date.now()-qStart)/1000;
+    document.querySelectorAll(".choice").forEach(b => { b.disabled=true; if(b.dataset.v===q.answer) b.classList.add("ok"); });
+    if(ok){
+      correct++; streak++; bestStreak=Math.max(bestStreak,streak);
+      const bonus = dt<3 ? 5 : dt<6 ? 2 : 0; const pts = 10 + bonus + Math.min(streak-1,5)*2;
+      score += pts; $("pSub").textContent = `✓ +${pts}` + (bonus?` (fast!)`:"") + (streak>=3?` · streak ×${streak}`:""); $("pSub").className="sub ok";
+    } else {
+      btn.classList.add("bad"); streak=0; missed.push(q.e.z);
+      $("pSub").textContent = `✕ ${q.e.name} is ${q.e.sym}, atomic number ${q.e.z}`; $("pSub").className="sub bad";
+      $("gPrompt").classList.add("shake"); setTimeout(()=>$("gPrompt").classList.remove("shake"),400);
+    }
+    hud(); i++;
+    setTimeout(ask, ok ? 700 : 1500);
+  }
+  $("choices").addEventListener("click", e => pick(e.target.closest(".choice")));
+  G.keyHandler = e => { if(view!=="game") return; const n=+e.key; if(n>=1&&n<=4){ const b=document.querySelectorAll(".choice")[n-1]; if(b) pick(b); } };
+  $("hQuit").addEventListener("click", gameHome);
+  ask();
+}
+
+/* ---- Speed Type ---- */
+function playSpeed(){
+  const pool = levelPool();
+  let queue = shuffle(pool), i=0, score=0, streak=0, bestStreak=0, correct=0, skipped=0, missed=[], left=60, cur=null;
+  const M = $("gm");
+  M.innerHTML = hudHTML(`<span class="pill time">Time <b id="hTime">60</b>s</span><span class="pill">Correct <b id="hOk">0</b></span>`) + `
+    <div class="gbar time"><i id="gBar" style="width:100%"></i></div>
+    <div class="prompt" id="gPrompt"><div class="q">Type the symbol for</div><div class="big" id="pBig"></div><div class="sub" id="pSub"></div></div>
+    <div class="typebox"><input id="tIn" type="text" maxlength="2" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="?" aria-label="Type the symbol"><button id="tSkip">Skip ↵</button></div>
+    <p class="ghow">Two-letter symbols check automatically; press <kbd>Enter</kbd> for one-letter symbols (like O or K). Capital letters don't matter.</p>`;
+  const inp = $("tIn");
+  function hud(){ $("hScore").textContent=score; $("hStreak").textContent=streak; $("hOk").textContent=correct; $("hTime").textContent=left; $("gBar").style.width=(left/60*100)+"%"; }
+  function next(){
+    if(i>=queue.length){ queue = queue.concat(shuffle(pool)); }
+    cur = queue[i++];
+    $("gPrompt").style.setProperty("--c", `var(--c-${cur.cat})`);
+    $("pBig").textContent = cur.name; $("pSub").textContent=""; $("pSub").className="sub";
+    inp.value=""; inp.className=""; inp.focus();
+  }
+  function check(force){
+    if(!cur) return;
+    const v = inp.value.trim();
+    if(!v && !force) return;
+    if(v.toLowerCase()===cur.sym.toLowerCase()){
+      correct++; streak++; bestStreak=Math.max(bestStreak,streak); const pts = 10 + Math.min(streak-1,5)*2; score+=pts;
+      inp.className="ok"; $("pSub").textContent=`✓ +${pts}`; $("pSub").className="sub ok"; hud(); setTimeout(next, 250);
+    } else if(force || v.length>=cur.sym.length){
+      streak=0; if(!missed.includes(cur.z)) missed.push(cur.z); if(!v) skipped++;
+      inp.className="bad"; $("pSub").textContent=`✕ ${cur.name} is ${cur.sym}`; $("pSub").className="sub bad";
+      $("gPrompt").classList.add("shake"); setTimeout(()=>$("gPrompt").classList.remove("shake"),400);
+      hud(); setTimeout(next, 900);
+    }
+  }
+  inp.addEventListener("input", () => { if(inp.value.length>=2) check(false); else if(inp.value.length===1 && inp.value.toLowerCase()===cur.sym.toLowerCase() && cur.sym.length===1){ /* wait for Enter so 'C' vs 'Ca' is a real choice */ } });
+  inp.addEventListener("keydown", e => { if(e.key==="Enter"){ e.preventDefault(); check(true); } });
+  $("tSkip").addEventListener("click", () => { inp.value=""; check(true); });
+  $("hQuit").addEventListener("click", gameHome);
+  G.stopTimer();
+  G.timer = setInterval(() => {
+    left--; hud();
+    if(left<=0){
+      G.stopTimer(); inp.disabled=true;
+      const st = correct>=25 ? 3 : correct>=15 ? 2 : correct>=7 ? 1 : 0;
+      finish("speed", score, {stars:st, missed, cells:[["Correct", correct],["Wrong/skipped", missed.length],["Best streak", bestStreak]]});
+    }
+  }, 1000);
+  hud(); next();
+}
+document.addEventListener("keydown", e => { if(G.keyHandler && view==="game" && e.target.tagName!=="INPUT") G.keyHandler(e); });
+
 buildDeckOptions();
 try{ const d = localStorage.getItem(KEY+"-deck"); if(d && [...$("deck").options].some(o=>o.value===d)) $("deck").value = d; }catch(e){}
 buildDeck(); render();
-try{ const v = localStorage.getItem(KEY+"-view"); if(v==="cards") setView("cards"); }catch(e){}
+try{ const v = localStorage.getItem(KEY+"-view"); if(v==="cards"||v==="game") setView(v); }catch(e){}
 </script>
 </body>
 </html>
