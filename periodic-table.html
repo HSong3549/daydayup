@@ -61,6 +61,8 @@
   .chip.on{background:var(--c);border-color:var(--c);color:#1b1822;}
   .chip.all i{background:linear-gradient(135deg,var(--c-alkali),var(--c-transition),var(--c-nonmetal),var(--c-noble));}
   .chip.all.on{background:var(--on-ink);border-color:var(--on-ink);}
+  .chip.honors{border-color:var(--gold);color:var(--gold-soft);}
+  .chip.honors.on{background:var(--gold);border-color:var(--gold);color:#3a2807;}
   .grpinfo{background:var(--ink-2);border:1px solid var(--line);border-radius:11px;padding:10px 14px;font-size:13.5px;line-height:1.5;color:var(--on-ink-dim);display:none;}
   .grpinfo.on{display:block;}
   .grpinfo b{color:var(--on-ink);}
@@ -606,7 +608,7 @@ $("viewSeg").addEventListener("click", e => { const b=e.target.closest("button")
 let hiCat = null, hiGroup = null, query = "";
 function buildLegend(){
   const L = $("legend");
-  L.innerHTML = '<button class="chip all on" data-cat=""><i></i>All</button>' +
+  L.innerHTML = '<button class="chip all on" data-cat=""><i></i>All</button><button class="chip honors" data-cat="honors" style="--c:var(--gold)"><i></i>Honors Chem 60</button>' +
     Object.keys(CATS).map(k => `<button class="chip" data-cat="${k}" style="--c:var(--c-${k})"><i></i>${CATS[k].name}</button>`).join("");
   L.addEventListener("click", e => {
     const b = e.target.closest(".chip"); if(!b) return;
@@ -662,12 +664,14 @@ function applyHighlight(){
   document.querySelectorAll(".cell[data-z]").forEach(c => {
     const e = byZ[c.dataset.z]; let show = true;
     if(q) show = e.name.toLowerCase().startsWith(q) || e.sym.toLowerCase()===q || String(e.z)===q || e.name.toLowerCase().includes(q) && q.length>2;
+    else if(hiCat==="honors") show = HONORS.has(e.z);
     else if(hiCat) show = e.cat===hiCat;
     else if(hiGroup) show = e.group===hiGroup && e.row<=7;
     c.classList.toggle("dim", !show);
   });
   const info = $("grpinfo");
-  if(!q && hiCat){ info.innerHTML = `<span class="dot" style="background:var(--c-${hiCat})"></span><b>${CATS[hiCat].name}</b> — ${CATS[hiCat].about}`; info.classList.add("on"); }
+  if(!q && hiCat==="honors"){ info.innerHTML = `<span class="dot" style="background:var(--gold)"></span><b>Honors Chem 60</b> — the 60 elements on the class handout: know the name and symbol of each (spelling counts!). Same set as the Honors Chem 60 flash-card deck and game level.`; info.classList.add("on"); }
+  else if(!q && hiCat){ info.innerHTML = `<span class="dot" style="background:var(--c-${hiCat})"></span><b>${CATS[hiCat].name}</b> — ${CATS[hiCat].about}`; info.classList.add("on"); }
   else if(!q && hiGroup){ const n = ELEMENTS.filter(e=>e.group===hiGroup&&e.row<=7).map(e=>e.sym).join(", "); info.innerHTML = `<b>${GROUP_NOTES[hiGroup]||("Group "+hiGroup+" — transition metals.")}</b><br>${n}`; info.classList.add("on"); }
   else info.classList.remove("on");
 }
