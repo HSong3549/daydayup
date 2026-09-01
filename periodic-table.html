@@ -165,6 +165,13 @@
   .b-grid .wide{grid-column:1 / -1;}
   .b-grid b sup{font-size:.7em;}
   .back .fx{font-family:Georgia,serif;font-style:italic;font-size:16px;line-height:1.45;color:#3a3640;margin-top:auto;padding-top:8px;border-top:1px solid rgba(0,0,0,.08);overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+  .fc.listing #sideSeg{display:none;}
+  .rev-only{display:none;}
+  .card.rev .face.front{transform:rotateY(180deg);}
+  .card.rev .face.back{transform:none;}
+  .card.rev .rev-only{display:block;margin-top:6px;}
+  .card.rev #bSym{visibility:hidden;}
+  .card.rev .back .fx{margin-top:auto;}
   .marks{display:flex;gap:10px;}
   .mark{flex:1;border:1.5px solid var(--line);background:var(--panel);color:var(--on-ink);border-radius:13px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s;display:flex;align-items:center;justify-content:center;gap:7px;}
   .mark.review.on{background:var(--coral);border-color:var(--coral);color:#fff;}
@@ -365,6 +372,10 @@
         <button data-status="learning">Still learning</button>
         <button data-status="mastered">Mastered</button>
       </div>
+      <div class="seg" id="sideSeg">
+        <button data-side="sym" class="on">Symbol first</button>
+        <button data-side="def">Details first</button>
+      </div>
       <div class="meter">
         <div class="meter-row"><span id="filterLabel">All elements</span><span><b id="mCount">0</b> mastered</span></div>
         <div class="bar"><i id="mBar"></i></div>
@@ -382,6 +393,7 @@
             <div class="name" id="bName"></div>
             <div class="b-grid" id="bGrid"></div>
             <div class="fx" id="bFact"></div>
+            <div class="hint rev-only">Tap to reveal the symbol</div>
           </div>
         </div>
         <div class="empty" id="empty" style="display:none;"></div>
@@ -587,7 +599,14 @@ $("dStudy").addEventListener("click", () => {
 });
 
 /* ================= FLASH CARDS ================= */
-let status = "all", deck = [], idx = 0, flipped = false, shuffled = false;
+let status = "all", deck = [], idx = 0, flipped = false, shuffled = false, side = "sym";
+function setSide(v){
+  side = v; document.querySelectorAll("#sideSeg button").forEach(b => b.classList.toggle("on", b.dataset.side===v));
+  $("card").classList.toggle("rev", v==="def");
+  try{ localStorage.setItem(KEY+"-side", v); }catch(e){}
+  render();
+}
+$("sideSeg").addEventListener("click", e => { const b=e.target.closest("button"); if(b) setSide(b.dataset.side); });
 function buildDeckOptions(){
   const S = $("deck");
   let html = `<optgroup label="Sets"><option value="all">All 118 elements</option><option value="first20">First 20 elements (H–Ca)</option><option value="first36">First 36 elements (H–Kr)</option><option value="main">Main table only (no lanthanides/actinides)</option><option value="honors">Honors Chem 60 (class list)</option></optgroup>`;
@@ -627,7 +646,7 @@ function render(){
   C.classList.remove("flipped"); flipped=false;
   C.style.setProperty("--c", `var(--c-${e.cat})`);
   $("fCat").querySelector("span").textContent = CATS[e.cat].name;
-  $("fSym").firstChild.textContent = e.sym; $("fZ").textContent = "ELEMENT " + e.z;
+  $("fSym").firstChild.textContent = e.sym; $("fZ").textContent = side==="def" ? e.name.toUpperCase() + " · #" + e.z : "ELEMENT " + e.z;
   const st = progress[e.z] || "new";
   $("fDot").className = "status-dot " + st; $("fStatus").textContent = st==="new" ? "New" : st==="learning" ? "Still learning" : "Mastered";
   $("bCat").querySelector("span").textContent = CATS[e.cat].name; $("bSym").textContent = e.sym + " · #" + e.z;
@@ -1066,6 +1085,7 @@ $("fcMode").addEventListener("click", e => { const b=e.target.closest("button");
 buildDeckOptions();
 try{ const d = localStorage.getItem(KEY+"-deck"); if(d && [...$("deck").options].some(o=>o.value===d)) $("deck").value = d; }catch(e){}
 buildDeck(); render();
+try{ const sd = localStorage.getItem(KEY+"-side"); if(sd==="def") setSide("def"); }catch(e){}
 try{ const fm = localStorage.getItem(KEY+"-fcmode"); if(fm==="list") setFcMode("list"); }catch(e){}
 try{ const v = localStorage.getItem(KEY+"-view"); if(v==="cards"||v==="game") setView(v); }catch(e){}
 </script>
