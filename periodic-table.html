@@ -585,7 +585,7 @@ $("dStudy").addEventListener("click", () => {
 let status = "all", deck = [], idx = 0, flipped = false, shuffled = false;
 function buildDeckOptions(){
   const S = $("deck");
-  let html = `<optgroup label="Sets"><option value="all">All 118 elements</option><option value="first20">First 20 elements (H–Ca)</option><option value="first36">First 36 elements (H–Kr)</option><option value="main">Main table only (no lanthanides/actinides)</option></optgroup>`;
+  let html = `<optgroup label="Sets"><option value="all">All 118 elements</option><option value="first20">First 20 elements (H–Ca)</option><option value="first36">First 36 elements (H–Kr)</option><option value="main">Main table only (no lanthanides/actinides)</option><option value="honors">Honors Chem 60 (class list)</option></optgroup>`;
   html += `<optgroup label="By category">` + Object.keys(CATS).map(k=>`<option value="cat:${k}">${CATS[k].name}</option>`).join("") + `</optgroup>`;
   html += `<optgroup label="By period">` + [1,2,3,4,5,6,7].map(p=>`<option value="per:${p}">Period ${p}</option>`).join("") + `</optgroup>`;
   html += `<optgroup label="By group">` + Array.from({length:18},(_,i)=>i+1).map(g=>`<option value="grp:${g}">Group ${g}${GROUP_NOTES[g]?" · "+GROUP_NOTES[g].split("—")[1].split(".")[0].trim():""}</option>`).join("") + `</optgroup>`;
@@ -596,6 +596,7 @@ function deckFilter(v){
   if(v==="first20") return e => e.z<=20;
   if(v==="first36") return e => e.z<=36;
   if(v==="main") return e => e.row<=7;
+  if(v==="honors") return e => HONORS.has(e.z);
   if(v.startsWith("cat:")) { const k=v.slice(4); return e => e.cat===k; }
   if(v.startsWith("per:")) { const p=+v.slice(4); return e => e.period===p; }
   if(v.startsWith("grp:")) { const g=+v.slice(4); return e => e.group===g && e.row<=7; }
@@ -679,10 +680,12 @@ const LEVELS = [
   {id:"l36",  name:"First 36",  filter:e=>e.z<=36},
   {id:"main", name:"Main table", filter:e=>e.row<=7},
   {id:"all",  name:"All 118",   filter:()=>true},
-  {id:"common", name:"Common elements", filter:e=>COMMON.has(e.z)},
+  {id:"honors", name:"Honors Chem 60", filter:e=>HONORS.has(e.z)},
 ];
-// the everyday elements most chemistry classes expect you to know (42)
-const COMMON = new Set([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,24,25,26,27,28,29,30,33,35,36,47,50,53,54,56,74,78,79,80,82,92]);
+// "Elements to know for Honors Chemistry" — the 60 on the class handout (name + symbol, spelling counts!)
+const HONORS = new Set([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
+  56,53,88,35,26,47,48,25,50,24,80,74,29,28,92,94,30,82,38,79,
+  21,22,23,27,31,32,33,34,36,37,42,51,52,54,55,58,78,83,86,87]);
 const MODES = {
   place: {name:"Place It",   ic:"🧩", c:"var(--c-nonmetal)",  about:"An element is called out — tap the square where it belongs on the blank table. Learn where everything lives."},
   name:  {name:"Name It",    ic:"🎯", c:"var(--c-alkali)",    about:"Quick-fire multiple choice: symbol, name and atomic number. Answer fast for bonus points."},
@@ -857,7 +860,7 @@ function playName(){
   function ask(){
     if(i>=nQ){ const acc=correct/nQ; finish("name", score, {stars:stars3(acc), missed, cells:[["Correct", correct+"/"+nQ],["Accuracy", Math.round(acc*100)+"%"],["Best streak", bestStreak]]}); return; }
     const e = order[i]; locked=false;
-    const kinds = ["sym","name","name2"].concat(["l10","l18","l36","common"].includes(G.level) ? ["num"] : []);
+    const kinds = ["sym","name","name2"].concat(["l10","l18","l36","honors"].includes(G.level) ? ["num"] : []);
     const kind = rnd(kinds);
     $("gPrompt").style.setProperty("--c", `var(--c-${e.cat})`);
     let choices, answer, fmt = x=>x;
