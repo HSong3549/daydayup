@@ -651,7 +651,10 @@ const LEVELS = [
   {id:"l36",  name:"First 36",  filter:e=>e.z<=36},
   {id:"main", name:"Main table", filter:e=>e.row<=7},
   {id:"all",  name:"All 118",   filter:()=>true},
+  {id:"common", name:"Common elements", filter:e=>COMMON.has(e.z)},
 ];
+// the everyday elements most chemistry classes expect you to know (42)
+const COMMON = new Set([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,24,25,26,27,28,29,30,33,35,36,47,50,53,54,56,74,78,79,80,82,92]);
 const MODES = {
   place: {name:"Place It",   ic:"🧩", c:"var(--c-nonmetal)",  about:"An element is called out — tap the square where it belongs on the blank table. Learn where everything lives."},
   name:  {name:"Name It",    ic:"🎯", c:"var(--c-alkali)",    about:"Quick-fire multiple choice: symbol, name and atomic number. Answer fast for bonus points."},
@@ -721,7 +724,7 @@ function finish(mode, score, stats){
 /* ---- Place It ---- */
 function playPlace(){
   const pool = levelPool(), queue = shuffle(pool.map(e=>e.z));
-  const showF = G.level==="all";
+  const showF = pool.some(e=>e.row>7);
   let score=0, streak=0, correct=0, wrong=0, hints=0, cur=null, locked=false, missed=[], attemptsOnCur=0;
   const t0 = Date.now();
   const M = $("gm");
@@ -826,7 +829,7 @@ function playName(){
   function ask(){
     if(i>=nQ){ const acc=correct/nQ; finish("name", score, {stars:stars3(acc), missed, cells:[["Correct", correct+"/"+nQ],["Accuracy", Math.round(acc*100)+"%"],["Best streak", bestStreak]]}); return; }
     const e = order[i]; locked=false;
-    const kinds = ["sym","name","name2"].concat(G.level==="l10"||G.level==="l18"||G.level==="l36" ? ["num"] : []);
+    const kinds = ["sym","name","name2"].concat(["l10","l18","l36","common"].includes(G.level) ? ["num"] : []);
     const kind = rnd(kinds);
     $("gPrompt").style.setProperty("--c", `var(--c-${e.cat})`);
     let choices, answer, fmt = x=>x;
