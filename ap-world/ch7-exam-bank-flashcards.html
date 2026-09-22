@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ch. 7 Exam Bank Flash Cards — AP World — Day Day Up</title>
+<meta name="description" content="Flash cards, matching game, 35-question quiz, and essay prompts from the Commerce and Culture 500–1500 exam banks (Ways of the World, Chapter 7).">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Manrope:wght@500;700;800&display=swap">
+<style>
+:root{
+  --bg:#f6f3ec; --surface:#fffdf8; --ink:#22262e; --muted:#5d6370; --rule:#dcd6c8;
+  --accent:#b8720e; --accent-soft:#f3e4c6;
+  --silk:#a83e3a; --sea:#0f6e77; --sand:#b9791f; --amer:#4b7a57; --all:#4d5568;
+  --silk-soft:#f6e1df; --sea-soft:#d9eef0; --sand-soft:#f5e7cf; --amer-soft:#dfeee2; --all-soft:#e4e6ec;
+  --good:#2e7d4f; --bad:#b3403c;
+  --shadow:0 1px 2px rgba(34,38,46,.06),0 8px 24px rgba(34,38,46,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15181f; --surface:#1d212a; --ink:#ece7dc; --muted:#a7adb8; --rule:#333947;
+    --accent:#e0a441; --accent-soft:#3a2f18;
+    --silk:#e28a86; --sea:#5ec4cd; --sand:#e2b062; --amer:#8fc39b; --all:#aab2c4;
+    --silk-soft:#3a2321; --sea-soft:#15353a; --sand-soft:#3a2d15; --amer-soft:#1f3326; --all-soft:#2a2f3b;
+    --good:#6fbf8f; --bad:#e08a86;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:Spectral,Georgia,"Times New Roman",serif;font-size:17px;line-height:1.55;margin:0}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+.label{font-family:Manrope,system-ui,sans-serif;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+header h1{font-family:Spectral,Georgia,serif;font-weight:600;font-size:clamp(28px,5vw,40px);line-height:1.1;margin:8px 0 12px;text-wrap:balance}
+header p{max-width:62ch;margin:0;color:var(--muted)}
+.btn{font-family:Manrope,system-ui,sans-serif;font-weight:700;font-size:13px;border:1.5px solid var(--rule);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 16px;cursor:pointer}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn:disabled{opacity:.4;cursor:default}
+.modes{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 8px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 18px}
+.toolbar .spacer{flex:1}
+.count{font-family:Manrope,system-ui,sans-serif;font-weight:700;font-size:13px;color:var(--muted)}
+/* ---- flip card ---- */
+.stage{perspective:1200px}
+.card3d{position:relative;width:100%;min-height:300px;cursor:pointer;transform-style:preserve-3d;transition:transform .45s}
+.card3d.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--surface);box-shadow:var(--shadow);border-top:5px solid var(--c,var(--accent));padding:26px 28px;display:flex;flex-direction:column}
+.face.back{transform:rotateY(180deg)}
+.face .kind{font-family:Manrope,system-ui,sans-serif;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--c,var(--accent))}
+.face .mid{flex:1;display:flex;align-items:center}
+.face .def{font-size:18.5px;line-height:1.5}
+.face .term{font-family:Spectral,Georgia,serif;font-weight:600;font-size:clamp(26px,5vw,36px);line-height:1.15}
+.face .hook{color:var(--muted);font-size:15px;margin-top:10px}
+.face .tap{font-family:Manrope,system-ui,sans-serif;font-size:12px;font-weight:700;color:var(--muted);text-align:right}
+.tag{display:inline-block;font-family:Manrope,system-ui,sans-serif;font-weight:700;font-size:11px;letter-spacing:.05em;text-transform:uppercase;border-radius:4px;padding:2px 7px;color:var(--c,var(--all));background:var(--cs,var(--all-soft));margin-top:12px;align-self:flex-start}
+.nav{display:flex;gap:8px;margin-top:16px;align-items:center}
+.mark{margin-left:auto;display:flex;gap:8px}
+.btn.good{color:var(--good);border-color:var(--good)}
+.btn.bad{color:var(--bad);border-color:var(--bad)}
+.progressbar{height:6px;background:var(--rule);border-radius:3px;overflow:hidden;margin-top:18px}
+.progressbar div{height:100%;width:0;background:var(--good);transition:width .3s}
+.progress-note{font-size:14px;color:var(--muted);margin-top:8px}
+/* ---- match game ---- */
+.mdef{background:var(--surface);box-shadow:var(--shadow);border-left:5px solid var(--accent);padding:20px 24px;font-size:18px;min-height:110px}
+.mdef .label{margin-bottom:6px}
+.bank{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:18px}
+.chipT{font-family:Manrope,system-ui,sans-serif;font-weight:700;font-size:14px;border:1.5px solid var(--rule);background:var(--surface);color:var(--ink);padding:10px 12px;cursor:pointer;text-align:left;border-radius:8px}
+.chipT:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chipT.used{opacity:.35;cursor:default;text-decoration:line-through}
+.chipT.right{border-color:var(--good);color:var(--good)}
+.chipT.wrong{border-color:var(--bad);color:var(--bad);animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.mscore{font-family:Manrope,system-ui,sans-serif;font-weight:700;font-size:14px;color:var(--muted);margin-top:14px}
+.mdone{background:var(--surface);box-shadow:var(--shadow);border-left:5px solid var(--good);padding:20px 24px;margin-top:16px}
+.mdone b{color:var(--good)}
+/* ---- MC quiz ---- */
+.choices{display:grid;gap:8px;margin-top:16px}
+.choice{font-family:inherit;font-size:16px;border:1.5px solid var(--rule);background:var(--surface);color:var(--ink);padding:12px 14px;cursor:pointer;text-align:left;border-radius:8px;display:flex;gap:10px}
+.choice .lt{font-family:Manrope,system-ui,sans-serif;font-weight:800;font-size:13px;color:var(--muted);min-width:18px;padding-top:2px}
+.choice:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.choice.right{border-color:var(--good);color:var(--good)}
+.choice.wrong{border-color:var(--bad);color:var(--bad)}
+.choice:disabled{cursor:default}
+.choice:disabled:not(.right):not(.wrong){opacity:.5}
+/* ---- essays ---- */
+.quizlist{display:grid;gap:10px}
+.eq{background:var(--surface);border:1px solid var(--rule);text-align:left;font:inherit;color:var(--ink);padding:14px 16px;width:100%;border-radius:8px}
+button.eq{cursor:pointer}
+.eq .q{font-weight:600}
+.eq .src{font-family:Manrope,system-ui,sans-serif;font-weight:800;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:4px}
+.eq .a{display:none;color:var(--muted);font-size:15.5px;margin-top:10px}
+.eq .a ul{margin:6px 0 0;padding-left:20px}
+.eq[aria-expanded="true"] .a{display:block}
+[hidden]{display:none!important}
+footer{margin-top:48px;font-size:14px;color:var(--muted);border-top:1px solid var(--rule);padding-top:16px}
+footer a{color:var(--sea)}
+@media (prefers-reduced-motion: reduce){.card3d{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="label">Ways of the World · Chapter 7 · Commerce and Culture, 600–1450 · Exam bank key terms</div>
+  <h1>Exam Bank Flash Cards</h1>
+  <p>Everything in the "Commerce and Culture 500–1500" exam banks: 14 key terms as flash cards and a matching game (Exam 8D), a 35-question multiple-choice quiz (Exams 8A + 8C), and 12 essay prompts (Exams 8B + 8E).</p>
+</header>
+
+<div class="modes" role="tablist" aria-label="Mode">
+  <button class="btn mode" data-sec="cards" aria-pressed="true">🃏 Flash cards</button>
+  <button class="btn mode" data-sec="match" aria-pressed="false">🎯 Matching game</button>
+  <button class="btn mode" data-sec="quiz" aria-pressed="false">📝 Quiz (35 MC)</button>
+  <button class="btn mode" data-sec="essays" aria-pressed="false">✍️ Essay prompts</button>
+</div>
+
+<!-- ================= CARDS ================= -->
+<section id="cards">
+  <div class="toolbar">
+    <button class="btn" id="dir" aria-pressed="false">Definition first</button>
+    <button class="btn" id="shuffle">🔀 Shuffle</button>
+    <button class="btn" id="reset">Reset progress</button>
+    <span class="spacer"></span>
+    <span class="count" id="count"></span>
+  </div>
+  <div class="stage">
+    <div class="card3d" id="card" role="button" tabindex="0" aria-label="Flash card — click or press Space to flip">
+      <div class="face front">
+        <span class="kind" id="f-kind"></span>
+        <div class="mid"><div id="f-body"></div></div>
+        <span class="tag" id="f-tag"></span>
+        <span class="tap">tap to flip</span>
+      </div>
+      <div class="face back">
+        <span class="kind" id="b-kind"></span>
+        <div class="mid"><div id="b-body"></div></div>
+        <span class="tag" id="b-tag"></span>
+        <span class="tap">tap to flip back</span>
+      </div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn" id="prev">← Prev</button>
+    <button class="btn" id="next">Next →</button>
+    <div class="mark">
+      <button class="btn bad" id="again">Again</button>
+      <button class="btn good" id="know">✓ Know it</button>
+    </div>
+  </div>
+  <div class="progressbar"><div id="bar"></div></div>
+  <p class="progress-note" id="note"></p>
+</section>
+
+<!-- ================= MATCH ================= -->
+<section id="match" hidden>
+  <div class="toolbar">
+    <button class="btn" id="mrestart">↻ Restart</button>
+    <span class="spacer"></span>
+    <span class="count" id="mleft"></span>
+  </div>
+  <div class="mdef">
+    <div class="label">Which term is this?</div>
+    <div id="mq"></div>
+  </div>
+  <div class="bank" id="bank"></div>
+  <p class="mscore" id="mscore"></p>
+  <div class="mdone" id="mdone" hidden></div>
+</section>
+
+<!-- ================= QUIZ ================= -->
+<section id="quiz" hidden>
+  <div class="toolbar">
+    <button class="btn" id="qrestart">↻ Restart</button>
+    <button class="btn" id="qshuffle" aria-pressed="false">🔀 Shuffle order</button>
+    <span class="spacer"></span>
+    <span class="count" id="qcount"></span>
+  </div>
+  <div class="mdef" id="qcard">
+    <div class="label" id="qsrc"></div>
+    <div id="qq" style="margin-top:6px"></div>
+  </div>
+  <div class="choices" id="qchoices"></div>
+  <div class="nav">
+    <button class="btn" id="qprev">← Prev</button>
+    <button class="btn" id="qnext">Next →</button>
+    <span class="spacer"></span>
+    <span class="mscore" id="qscore" style="margin:0"></span>
+  </div>
+  <div class="mdone" id="qdone" hidden></div>
+</section>
+
+<!-- ================= ESSAYS ================= -->
+<section id="essays" hidden>
+  <p class="lede" style="color:var(--muted);margin:14px 0 18px">Exam 8B is nine short essay prompts (no key given). Exam 8E is three long ones — tap those to see what a full answer should cover.</p>
+  <div class="quizlist" id="elist"></div>
+</section>
+
+<footer>
+From the Commerce and Culture 500–1500 exam banks (Strayer, <em>Ways of the World</em>, Ch. 7): terms from <a href="https://examlex.help/exams/107708-exams-8-d-commerce-and-culture-50015">Exam 8D</a>, multiple choice from <a href="https://examlex.help/exams/107705-exam-8-a-commerce-and-culture-50015">8A</a> and <a href="https://examlex.help/exams/107707-exam-8-c-commerce-and-culture-50015">8C</a>, essays from <a href="https://examlex.help/exams/107706-exam-8-b-commerce-and-culture-50015">8B</a> and <a href="https://examlex.help/exams/107709-exam-8-e-commerce-and-culture-50015">8E</a>.
+Locked answer keys were filled in from the chapter itself (every answer the site does show matches). Dates in the memory hooks follow the <a href="ch7-commerce-culture-timeline.html">Ch. 7 timeline</a>. <a href="index.html">← AP World</a>
+</footer>
+</div>
+
+<script>
+// term, definition (verbatim from the exam bank), network, memory hook
+const CARDS=[
+["Silk Roads","Land-based trade routes that linked Eurasia.","silk","Three booms: Han+Rome (200 BCE–200 CE), Tang+Abbasid (7th–8th c.), Mongols (1200–1400)."],
+["Indian Ocean trading network","The world's largest sea-based system of communication and exchange before 1500 C.E.; stretched from southern China to eastern Africa and included not only the exchange of luxury and bulk goods but also the exchange of ideas and crops.","sea","= the Sea Roads. Runs on monsoon winds; bulk goods, not just luxuries."],
+["Sand Roads","A term used to describe the routes of the trans-Sahara trade in Africa.","sand","Gold + salt south–north; made possible by the camel (1–300 CE)."],
+["American web","A term used to describe the network of trade that linked parts of the pre-Columbian Americas; less intense and complete than the Afro-Eurasian networks, but a means of exchange for luxury goods and ideas over large areas.","amer","Regional, not hemispheric: no pack animals north of the Andes, no long-distance sailing."],
+["Srivijaya","A Malay kingdom that dominated the Straits of Malacca between 670 and 1025 C.E.; noted for its creation of a native/Indian hybrid culture.","sea","Taxed passing ships; adopted Indian Buddhism and Sanskrit. Replaced by Malacca c. 1400."],
+["Angkor Wat","The largest religious structure in the premodern world; construction began in the early 1100s C.E. in modern Cambodia. Built to express a Hindu understanding of the cosmos, centered on the mythical Mount Meru, home of the gods.","sea","Khmer kingdom of Angkor. Hindu first, Buddhist later — Indian culture moving inland."],
+["Swahili civilization","An East African civilization that emerged in the eighth century C.E. from a blending of Bantu, Islamic, and other Indian Ocean trade elements.","sea","City-states: Kilwa, Mombasa, Malindi, Sofala. Flourished ca. 1000–1500; Ibn Battuta at Kilwa 1331."],
+["Great Zimbabwe","A powerful state in the African interior that apparently emerged from the growing trade in gold to the East African coast; flourished between 1250 and 1350 C.E.","sea","The inland gold supplier behind the Swahili coast; famous stone enclosures."],
+["Ghana, Mali, Songhay","A series of important states that developed in western and central Sudan in the period 500–1600 C.E. in response to the economic opportunities of trans-Saharan trade (especially control of gold production).","sand","In that order! Ghana c. 700–1200 → Mali c. 1235 (Mansa Musa 1324) → Songhay to 1591."],
+["Arabian camel","Animal that made the long trek across the Sahara possible because it could travel for ten days without water. It stimulated trade and contact, which led to the establishment of West African empires and facilitated the spread of Islam into the region.","sand","Introduced 1–300 CE; caravans of up to 5,000 camels. The chapter's Zooming In feature."],
+["trans-Saharan slave trade","A fairly small-scale trade that developed in the twelfth century C.E., exporting West Africans captured in raids across the Sahara for sale mostly as household servants.","sand","About 5,500 people a year by the 1100s; slaves joined gold and salt going north."],
+["pochteca","Professional merchants among the Aztecs.","amer","Traded across Mesoamerica, 1400–1500; the Inca moved goods by state-run llama caravan instead."],
+["Thorfinn Karlsefni","A well-born, wealthy merchant and seaman of Norwegian Viking background who led an unsuccessful expedition to establish a colony on the coast of what is now Newfoundland in the early eleventh century C.E.","amer","The exception that proves the rule: the Americas stayed outside the Afro-Eurasian web."],
+["Black Death","The name given to the massive epidemic that swept Eurasia in the fourteenth century C.E.; it may have been bubonic plague, anthrax, or a collection of epidemic diseases.","silk","Rode the Mongol-era Silk Roads; enters Europe 1347, kills up to half of it."]
+];
+const NET={silk:"Silk Roads",sea:"Sea Roads",sand:"Sand Roads",amer:"American network"};
+const store={
+  get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+const KEY='ch7-exambank-cards-v1';
+
+// ---------- mode switching ----------
+const SECS=['cards','match','quiz','essays'];
+const secCards=document.getElementById('cards');
+function setMode(sec){
+  document.querySelectorAll('.mode').forEach(b=>b.setAttribute('aria-pressed',b.dataset.sec===sec));
+  SECS.forEach(s=>document.getElementById(s).hidden=(s!==sec));
+  if(sec==='match'&&!mStarted)mRestart();
+  if(sec==='quiz'&&!qStarted)qRestart();
+}
+document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.sec)));
+
+// ---------- flash cards ----------
+let order=[...CARDS.keys()],idx=0,termFirst=false;
+let known=store.get(KEY,{});
+const card=document.getElementById('card');
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function fill(kindEl,bodyEl,tagEl,c,isTerm){
+  document.getElementById(kindEl).textContent=isTerm?'Term':'Definition';
+  const b=document.getElementById(bodyEl);
+  b.innerHTML=isTerm?'<div class="term">'+esc(c[0])+'</div><div class="hook">'+esc(c[3])+'</div>'
+                    :'<div class="def">'+esc(c[1])+'</div>';
+  document.getElementById(tagEl).textContent=NET[c[2]];
+}
+function show(){
+  const c=CARDS[order[idx]];
+  card.classList.remove('flipped');
+  card.style.setProperty('--c','var(--'+c[2]+')');
+  card.style.setProperty('--cs','var(--'+c[2]+'-soft)');
+  fill('f-kind','f-body','f-tag',c,termFirst);
+  fill('b-kind','b-body','b-tag',c,!termFirst);
+  document.getElementById('count').textContent=(idx+1)+' / '+CARDS.length+(known[order[idx]]?' · ✓':'');
+  const n=Object.values(known).filter(Boolean).length;
+  document.getElementById('bar').style.width=(100*n/CARDS.length)+'%';
+  document.getElementById('note').textContent=n===CARDS.length?'All 14 marked "know it" — ready for the exam! 🎉':n+' of '+CARDS.length+' marked "know it".';
+}
+card.addEventListener('click',()=>card.classList.toggle('flipped'));
+card.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();card.classList.toggle('flipped');}});
+document.getElementById('prev').addEventListener('click',()=>{idx=(idx-1+order.length)%order.length;show();});
+document.getElementById('next').addEventListener('click',()=>{idx=(idx+1)%order.length;show();});
+document.addEventListener('keydown',e=>{
+  if(!secCards.hidden){
+    if(e.key==='ArrowLeft'){idx=(idx-1+order.length)%order.length;show();}
+    if(e.key==='ArrowRight'){idx=(idx+1)%order.length;show();}
+  }
+});
+document.getElementById('dir').addEventListener('click',e=>{
+  termFirst=!termFirst;
+  e.currentTarget.setAttribute('aria-pressed',termFirst);
+  e.currentTarget.textContent=termFirst?'Term first':'Definition first';
+  show();
+});
+document.getElementById('shuffle').addEventListener('click',()=>{
+  for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+  idx=0;show();
+});
+document.getElementById('know').addEventListener('click',()=>{known[order[idx]]=true;store.set(KEY,known);idx=(idx+1)%order.length;show();});
+document.getElementById('again').addEventListener('click',()=>{known[order[idx]]=false;store.set(KEY,known);idx=(idx+1)%order.length;show();});
+document.getElementById('reset').addEventListener('click',()=>{known={};store.set(KEY,known);show();});
+show();
+
+// ---------- matching game ----------
+let mStarted=false,mOrder=[],mIdx=0,mWrong=0,mLock=false;
+const bank=document.getElementById('bank');
+function mRestart(){
+  mStarted=true;mIdx=0;mWrong=0;mLock=false;
+  mOrder=[...CARDS.keys()];
+  for(let i=mOrder.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[mOrder[i],mOrder[j]]=[mOrder[j],mOrder[i]];}
+  document.getElementById('mdone').hidden=true;
+  bank.innerHTML='';
+  const letters='ABCDEFGHIJKLMN';
+  // bank stays in a fixed (alphabetical-ish) order like the real exam sheet
+  const bankOrder=[...CARDS.keys()].sort((a,b)=>CARDS[a][0].localeCompare(CARDS[b][0]));
+  bankOrder.forEach((ci,i)=>{
+    const b=document.createElement('button');
+    b.className='chipT';b.dataset.ci=ci;
+    b.textContent=letters[i]+') '+CARDS[ci][0];
+    b.addEventListener('click',()=>mPick(b));
+    bank.appendChild(b);
+  });
+  mShow();
+}
+function mShow(){
+  document.getElementById('mq').textContent=CARDS[mOrder[mIdx]][1];
+  document.getElementById('mleft').textContent=(mIdx+1)+' / '+CARDS.length;
+  document.getElementById('mscore').textContent=mWrong===0?'No misses yet.':'Misses: '+mWrong;
+}
+function mPick(btn){
+  if(mLock||btn.classList.contains('used'))return;
+  const want=mOrder[mIdx];
+  if(+btn.dataset.ci===want){
+    mLock=true;
+    btn.classList.add('right','used');
+    setTimeout(()=>{
+      btn.classList.remove('right');
+      mIdx++;
+      if(mIdx>=CARDS.length){
+        const d=document.getElementById('mdone');
+        d.hidden=false;
+        d.innerHTML='<b>Done!</b> All 14 matched with '+mWrong+' miss'+(mWrong===1?'':'es')+'.'+(mWrong===0?' Perfect — that\'s exam-ready.':' Replay the ones you missed with the flash cards.');
+        document.getElementById('mleft').textContent='14 / 14';
+      }else mShow();
+      mLock=false;
+    },350);
+  }else{
+    mWrong++;
+    btn.classList.add('wrong');
+    setTimeout(()=>btn.classList.remove('wrong'),400);
+    mShow();
+  }
+}
+
+// ---------- MC quiz (Exams 8A + 8C) ----------
+// [source, question, [choices A-F], correct index]
+const QUIZ=[
+["Exam 8A · Source: Xuanzang","Which of the following reflects the state of Buddhist studies in seventh-century India as described by the Chinese monk Xuanzang?",["United","Divided","Syncretic","Secular","A) and B)","A) and C)"],1],
+["Exam 8A · Source: Leo Africanus","According to Leo Africanus's account, West Africans were willing to pay high prices for",["gold","grain","slaves","horses","None of the above","All of the above"],3],
+["Exam 8A · Source: Marco Polo","Marco Polo's description of the city of Hangzhou, which he referred to as Kinsay, highlights the role of the city as an important center for",["trade","art","Confucianism","Christianity","B) and C)","A) and D)"],0],
+["Exam 8A · Source: Xuanzang","What aspect of Indian society does the Chinese monk Xuanzang describe in detail?",["Competitive sports","Local markets","The guild system","The caste system","All of the above","C) and D)"],3],
+["Exam 8A · Source: Leo Africanus","Leo Africanus's account offers evidence of long-distance trade between West Africa and",["China","Oceania","Europe","India","None of the above","All of the above"],2],
+["Exam 8C","Which of the following highlights an effect of the international trade in silk?",["The declining price of silk by the tenth century as demand diminished","The association of silk with the sacred in Buddhism and Christianity","The widespread use of silk materials among commoners","The economic decline of China as competitors produced better quality silk","All of the above","None of the above"],1],
+["Exam 8C","What was one characteristic of Indian cultural influence in Southeast Asia?",["It resulted from the political conquest of the region by Emperor Ashoka","It spread through the voluntary adoption and adaptation of Indian ideas","It began with the travels of the Buddha to this region toward the end of his life","It resulted in the region rejecting the influence of Islam","C) and D)","None of the above"],1],
+["Exam 8C","Which of the following states had the greatest control over economic exchange within its borders?",["The Aztec Empire","The Byzantine Empire","The Roman Empire","The Inca Empire","B) and D)","A) and C)"],3],
+["Exam 8C","How did the spread of Islam affect Indian Ocean commerce?",["Islamic religious leaders decreed that Muslim merchants could have no dealings with non-Muslim traders","Early rulers of the Arab Empire promoted trade within the empire by banning trade beyond its borders","Islamic rulers were suspicious of merchants and succeeded in shutting down all trade on the Silk Roads","Muslim merchants and sailors established communities of traders from East Africa to the south China coast","B) and D)","A) and B)"],3],
+["Exam 8C","Ships sailing along the Indian Ocean trade routes (Map 7.2) were dependent on",["hinterlands","oil","monsoons","slaves","C) and D)","B) and C)"],2],
+["Exam 8C","What development between the seventh and thirteenth centuries increased and expanded trade in the Indian Ocean basin?",["The missionary zeal of Christian merchants who viewed religious conversion as their primary goal","The encouragement of maritime trade by an effective and unified Chinese state","Global warming trends that increased agricultural production worldwide","The discovery of a new route linking Asia to the Americas","A) and B)","A) and C)"],1],
+["Exam 8C","The states that emerged between 500 and 1600 that controlled the long-distance trade across the Sahara were concentrated in which part of Africa?",["The Arabian Peninsula","Western and central Sudan","Madagascar","South Africa","A) and D)","A) and C)"],1],
+["Exam 8C","The political structure of Swahili civilization was similar to the",["large empires of ancient Rome and China","stateless cities of the Niger River Valley","complex societies of the Eastern Woodlands in North America","competitive and independent city-states of ancient Greece","B) and D)","B) and C)"],3],
+["Exam 8C","What made possible the long trek across the Sahara?",["Donkeys","Camels","Salt","Slaves","A) and B)","A) and D)"],1],
+["Exam 8C","In which third-wave civilization did the state largely control trade, preventing a professional merchant class from emerging?",["China","Inca","Aztec","Mali","A) and B)","B) and C)"],1],
+["Exam 8C","The spread of the Black Death from China to Europe in the fourteenth century occurred during an era of increased contact facilitated by",["monsoon winds","the spread of Buddhism","the spread of Islam","Mongol rule","A) and D)","A) and C)"],3],
+["Exam 8C","Between 500 and 1500, the civilizations of Mesoamerica and the Andes",["ran similar regional economies controlled by the state","created a long-distance trade network in the Americas","fought with one another for control of the fur trade","seem to have had little direct contact with each other","B) and D)","B) and C)"],3],
+["Exam 8C","In contrast to the Silk Roads, the Sea Roads of the Indian Ocean",["carried more products for a mass market","had much higher transportation costs","dealt exclusively in the trade of luxury goods","were centered on the ports of East Africa","All of the above","B) and D)"],0],
+["Exam 8C","The Silk Roads built on earlier trading connections between Eurasian civilizations and",["Bantu migrants","Indian merchants","pastoral peoples","Paleolithic societies","C) and D)","None of the above"],2],
+["Exam 8C","Swahili civilization was influenced by which of the following cultures?",["Chinese","Indian","Bantu","European","A) and B)","None of the above"],2],
+["Exam 8C","The Sahara held rich deposits of which highly valued commodity?",["Salt","Gold","Oil","Nickel","B) and D)","A) and B)"],0],
+["Exam 8C","Which of the following describes the Swahili civilization's relationship with the people who lived in the interior?",["Swahili kings expanded into the interior, eventually establishing an empire that stretched from coast to coast","Swahili states demanded that people living in the interior pay an annual tribute to gain access to the coastal trade","Swahili cities operated as intermediaries for people from the interior to sell their goods to Arab merchants","Swahili culture spread throughout most of the interior, as evidenced by widespread acceptance of Islam","A) and D)","A) and C)"],2],
+["Exam 8C","Which of the following luxury goods came to symbolize the Eurasian exchange system?",["Silk","Porcelain","Nutmeg","Slaves","A) and D)","B) and C)"],0],
+["Exam 8C","Which of the following is an example of the Indianization of Southeast Asia?",["The architectural expression of Hinduism at Angkor Wat","The use of Arabic script to write the Swahili language","A bronze African lion with Indian designs","The adoption of Islam as the state religion in Champa","All of the above","A) and B)"],0],
+["Exam 8C","In the thirteenth and fourteenth centuries, Eurasia experienced a period of intensified interaction under the rule of the",["Swahilis","Berbers","Mongols","Chinese","A) and D)","B) and C)"],2],
+["Exam 8C","Which technological innovations facilitated Indian Ocean commerce?",["Quipus","Pochteca","Junks","Nyama","A) and B)","A) and C)"],2],
+["Exam 8C","Which outcome resulted from disease exchange along the Silk Roads?",["The Christian church in the Byzantine Empire weakened","Europeans developed some immunity to Eurasian diseases","Chinese officials sought to suppress long-distance trade","The population in the Americas was virtually wiped out","None of the above","B) and D)"],1],
+["Exam 8C","The Sand Roads connected North Africa to which region?",["Interior West Africa","The Swahili civilization","Borobudur","Great Zimbabwe","A) and B)","B) and C)"],0],
+["Exam 8C","What characterized exchange networks in the Americas?",["Networks were local, with active links within rather than between regions","Networks created a hybrid culture encompassing all the Americas","Panama's isthmus operated as the center for trade between North and South America","The Incas controlled all long-distance trade","A) and B)","A) and C)"],0],
+["Exam 8C","Why was Silk Road trade largely relay trade?",["It linked the entire world into a single network","It linked coastal Eurasian civilizations but bypassed interior pastoral peoples","Goods were passed down the line rather than carried by one merchant along the entire route","It sustained long-distance trade in the Americas","A) and B)","None of the above"],2],
+["Exam 8C","What facilitated Silk Roads trade?",["The collapse of Indian Ocean trade networks benefitting land routes","Large and powerful states providing security for merchants","Migration of Bantu-speaking people into South Asia and the Middle East","Emergence of powerful Southeast Asian states controlling trade","B) and C)","A) and B)"],1],
+["Exam 8C","The absence of which of the following complicated long-distance trade in the Americas?",["Wheeled vehicles","Llamas (outside the Andes)","Rivers","Organized governments","A) and B)","A) and C)"],4],
+["Exam 8C","How did Buddhism change along the Silk Roads?",["Practices increasingly emphasized asceticism and withdrawal","Doctrines became more esoteric","The Buddha became more human and less divine","Local gods were incorporated as bodhisattvas","B) and D)","B) and C)"],3],
+["Exam 8C","Which statement characterizes the exchange networks of 500–1500?",["Competition for trade routes sparked numerous wars","Trade established diplomatic relations between states","Regional trade organizations formed monopolies","Major civilizations interacted on a relatively equal basis","None of the above","B) and D)"],3],
+["Exam 8C","How did Silk Road trade affect Chinese peasants?",["They focused more on producing luxury goods","They abandoned farming to enter commerce","They converted to Buddhism in large numbers","They only cultivated crops for subsistence","None of the above","A) and B)"],0]
+];
+const QKEY='ch7-exambank-quiz-v1';
+let qStarted=false,qOrder=[],qIdx=0,qAns={},qShuffleOn=false;
+function qRestart(){
+  qStarted=true;qIdx=0;qAns={};
+  qOrder=[...QUIZ.keys()];
+  if(qShuffleOn){for(let i=qOrder.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[qOrder[i],qOrder[j]]=[qOrder[j],qOrder[i]];}}
+  document.getElementById('qdone').hidden=true;
+  qShow();
+}
+function qShow(){
+  const qi=qOrder[qIdx],item=QUIZ[qi];
+  document.getElementById('qsrc').textContent=item[0];
+  document.getElementById('qq').textContent=item[1];
+  document.getElementById('qcount').textContent=(qIdx+1)+' / '+QUIZ.length;
+  const box=document.getElementById('qchoices');box.innerHTML='';
+  const letters='ABCDEF';
+  item[2].forEach((ch,i)=>{
+    const b=document.createElement('button');b.className='choice';
+    b.innerHTML='<span class="lt">'+letters[i]+')</span><span>'+esc(ch)+'</span>';
+    const done=qi in qAns;
+    if(done){
+      b.disabled=true;
+      if(i===item[3])b.classList.add('right');
+      else if(i===qAns[qi])b.classList.add('wrong');
+    }else{
+      b.addEventListener('click',()=>{qAns[qi]=i;qShow();qCheckDone();});
+    }
+    box.appendChild(b);
+  });
+  const answered=Object.keys(qAns).length;
+  const right=Object.entries(qAns).filter(([k,v])=>QUIZ[k][3]===v).length;
+  document.getElementById('qscore').textContent=answered?right+' / '+answered+' correct':'';
+}
+function qCheckDone(){
+  if(Object.keys(qAns).length===QUIZ.length){
+    const right=Object.entries(qAns).filter(([k,v])=>QUIZ[k][3]===v).length;
+    const best=store.get(QKEY,0);
+    if(right>best)store.set(QKEY,right);
+    const d=document.getElementById('qdone');d.hidden=false;
+    d.innerHTML='<b>Finished!</b> '+right+' of '+QUIZ.length+' correct.'+(right>best?' New best score!':(best?' Best so far: '+Math.max(best,right)+'.':''));
+  }
+}
+document.getElementById('qprev').addEventListener('click',()=>{qIdx=(qIdx-1+qOrder.length)%qOrder.length;qShow();});
+document.getElementById('qnext').addEventListener('click',()=>{qIdx=(qIdx+1)%qOrder.length;qShow();});
+document.getElementById('qrestart').addEventListener('click',qRestart);
+document.getElementById('qshuffle').addEventListener('click',e=>{qShuffleOn=!qShuffleOn;e.currentTarget.setAttribute('aria-pressed',qShuffleOn);qRestart();});
+
+// ---------- essay prompts (Exams 8B + 8E) ----------
+const ESSAYS=[
+["8B","What positive and negative effects did long-distance trade bring?",null],
+["8B","What factors inhibited the development of long-distance exchange networks in the Americas?",null],
+["8B","What role did geography and environment play in shaping the development of long-distance trade from 500 to 1500?",null],
+["8B","How did international commerce affect the lives of women?",null],
+["8B","How did the Silk Roads, Sea Roads, and Sand Roads evolve from earlier patterns of exchange?",null],
+["8B","How did silk symbolize the networks of exchange within the Afro-Eurasian world?",null],
+["8B","In which regions of the Afro-Eurasian trade network did religions from other areas arrive and have a profound impact between 500 and 1500 C.E.?",null],
+["8B","Compare and contrast the Silk Roads across Central Asia and the Sand Roads across the Sahara.",null],
+["8B","What was the relationship between the state and merchants in long-distance trade?",null],
+["8E","Compare and contrast the integration of Southeast Asia and Swahili East Africa into the Indian Ocean world.",
+ ["Both strengthened states through Indian Ocean trade wealth and participated fully in the networks","Both received outside religions (Buddhism/Hinduism in Southeast Asia; Islam on the Swahili coast), political and cultural innovations, and influential settlers","Contrast: Southeast Asia was much more heavily influenced by Indian civilization; Swahili East Africa by the Islamic world","Different roles: Southeast Asia sat at a bottleneck (the straits); the Swahili coast was the interchange point for sub-Saharan goods"]],
+["8E","How did trade along the Silk Roads, Sea Roads, and Sand Roads spur political, economic, social, and cultural changes?",
+ ["Political: rulers used trade wealth to build centralized states; god-king ideas in Southeast Asia; state formation in the Sudan; rise of Swahili city-states","Economic: more manufacturing of luxury goods; peasants shifted from subsistence farming toward producing for Silk Road markets","Social: merchant classes accumulated wealth and status; stratification increased; gender patterns shifted (patrilineal displacing matrilineal in some regions)","Cultural: spread of Buddhism, Hinduism, Islam, and Christianity along the routes; Indian artistic and literary influence in Southeast Asia"]],
+["8E","While long-distance trade across Afro-Eurasia predates 500 C.E., it grew in importance between 500 and 1500 C.E. What key developments make this statement true?",
+ ["Consumption patterns changed: specialization replaced local self-sufficiency","Religions (Buddhism, Islam) spread along the routes","Epidemic diseases spread more readily along the trade routes than before","Stronger states developed in Swahili East Africa, West Africa, and Southeast Asia","Technology advanced: larger ships (junks), the magnetic compass"]]
+];
+const elist=document.getElementById('elist');
+ESSAYS.forEach(([src,q,pts])=>{
+  if(pts){
+    const b=document.createElement('button');b.className='eq';b.setAttribute('aria-expanded','false');
+    b.innerHTML='<span class="src">Exam '+src+' · tap for what to cover</span><span class="q">'+esc(q)+'</span><span class="a"><ul>'+pts.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ul></span>';
+    b.addEventListener('click',()=>b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')!=='true'));
+    elist.appendChild(b);
+  }else{
+    const d=document.createElement('div');d.className='eq';
+    d.innerHTML='<span class="src">Exam '+src+'</span><span class="q">'+esc(q)+'</span>';
+    elist.appendChild(d);
+  }
+});
+</script>
+</body>
+</html>
